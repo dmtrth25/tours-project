@@ -1,3 +1,4 @@
+import NavBar from './components/navbar/NavBar';
 import './globals.css';
 import { Nunito } from 'next/font/google';
 
@@ -13,7 +14,10 @@ const nunitoFont = Nunito({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={nunitoFont.className}>{children}</body>
+      <body className={nunitoFont.className}>
+        <NavBar />
+        {children}
+      </body>
     </html>
   );
 }
