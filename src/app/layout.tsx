@@ -1,23 +1,30 @@
-import NavBar from './components/navbar/NavBar';
-import './globals.css';
-import { Nunito } from 'next/font/google';
+import OnlyClient from "./components/OnlyClient"
+import NavBar from "./components/navbar/NavBar"
+import "./globals.css"
+import { Nunito } from "next/font/google"
 
 export const metadata = {
-  title: 'Tours',
-  description: 'Tours description',
-};
+  title: "Tours",
+  description: "Tours description",
+}
 
 const nunitoFont = Nunito({
-  subsets: ['latin'],
-});
+  subsets: ["latin"],
+})
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
       <body className={nunitoFont.className}>
-        <NavBar />
+        <OnlyClient>
+          <NavBar />
+        </OnlyClient>
         {children}
       </body>
     </html>
-  );
+  )
 }
