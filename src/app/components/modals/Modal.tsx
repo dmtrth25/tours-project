@@ -1,7 +1,8 @@
 "use client"
 
-import { FC, useCallback, useEffect, useState } from "react"
+import { FC, ReactElement, useCallback, useEffect, useState } from "react"
 import { IoMdClose } from "react-icons/io"
+import Button from "../Button"
 interface IModalProps {
   isOpen?: boolean
   disabled?: boolean
@@ -9,6 +10,7 @@ interface IModalProps {
   onSubmit: () => void
   nextAction?: () => void
   title?: string
+  body?: ReactElement
 }
 
 const Modal: FC<IModalProps> = ({
@@ -18,6 +20,7 @@ const Modal: FC<IModalProps> = ({
   onSubmit,
   nextAction,
   title,
+  body,
 }) => {
   const [showModal, setShowModal] = useState(isOpen)
 
@@ -80,6 +83,14 @@ const Modal: FC<IModalProps> = ({
                   <IoMdClose size={18} />
                 </button>
                 <div className="text-lg font-semibold">{title}</div>
+              </div>
+              {/*Body*/}
+              <div className="relative p-6 flex-auto">{body}</div>
+              {/*Footer*/}
+              <div className="flex flex-col gap-2 p-6">
+                <div className="flex flex-row items-center gap-4 w-full">
+                  <Button label="test button" />
+                </div>
               </div>
             </div>
           </div>
