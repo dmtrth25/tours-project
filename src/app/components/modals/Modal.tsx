@@ -11,6 +11,9 @@ interface IModalProps {
   nextAction?: () => void
   title?: string
   body?: ReactElement
+  actionLabel: string
+  secondaryActionLabel?: string
+  secondaryAction?: () => void
 }
 
 const Modal: FC<IModalProps> = ({
@@ -21,6 +24,9 @@ const Modal: FC<IModalProps> = ({
   nextAction,
   title,
   body,
+  actionLabel,
+  secondaryActionLabel,
+  secondaryAction,
 }) => {
   const [showModal, setShowModal] = useState(isOpen)
 
@@ -89,7 +95,19 @@ const Modal: FC<IModalProps> = ({
               {/*Footer*/}
               <div className="flex flex-col gap-2 p-6">
                 <div className="flex flex-row items-center gap-4 w-full">
-                  <Button label="test button" />
+                  {secondaryAction && secondaryActionLabel && (
+                    <Button
+                      outline
+                      disabled={disabled}
+                      label={secondaryActionLabel}
+                      onClick={handleNextAction}
+                    />
+                  )}
+                  <Button
+                    disabled={disabled}
+                    label={actionLabel}
+                    onClick={handleSubmit}
+                  />
                 </div>
               </div>
             </div>
