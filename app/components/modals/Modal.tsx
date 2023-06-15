@@ -3,14 +3,15 @@
 import { FC, ReactElement, useCallback, useEffect, useState } from "react"
 import { IoMdClose } from "react-icons/io"
 import Button from "../Button"
+
 interface IModalProps {
   isOpen?: boolean
   disabled?: boolean
   onClose: () => void
   onSubmit: () => void
-  nextAction?: () => void
   title?: string
   body?: ReactElement
+  footer?: ReactElement
   actionLabel: string
   secondaryActionLabel?: string
   secondaryAction?: () => void
@@ -21,9 +22,9 @@ const Modal: FC<IModalProps> = ({
   disabled,
   onClose,
   onSubmit,
-  nextAction,
   title,
   body,
+  footer,
   actionLabel,
   secondaryActionLabel,
   secondaryAction,
@@ -54,12 +55,12 @@ const Modal: FC<IModalProps> = ({
   }, [])
 
   const handleNextAction = useCallback(() => {
-    if (disabled || !nextAction) {
+    if (disabled || !secondaryAction) {
       return
     }
 
-    nextAction()
-  }, [disabled, nextAction])
+    secondaryAction()
+  }, [disabled, secondaryAction])
 
   if (!isOpen) {
     return null
@@ -109,6 +110,7 @@ const Modal: FC<IModalProps> = ({
                     onClick={handleSubmit}
                   />
                 </div>
+                {footer}
               </div>
             </div>
           </div>

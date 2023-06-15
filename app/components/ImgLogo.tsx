@@ -1,6 +1,6 @@
-'use client';
+"use client"
 
-import Image from 'next/image';
+import Image from "next/image"
 
 const ImgLogo = () => {
   return (
@@ -11,7 +11,7 @@ const ImgLogo = () => {
       alt="Image logo"
       src="/img/image-logo.jpeg"
     />
-  );
-};
+  )
+}
 
-export default ImgLogo;
+export default ImgLogo

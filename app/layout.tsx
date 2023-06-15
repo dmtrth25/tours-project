@@ -3,6 +3,7 @@ import RegisterModal from "./components/modals/RegisterModal"
 import NavBar from "./components/navbar/NavBar"
 import "./globals.css"
 import { Nunito } from "next/font/google"
+import ToasterProvider from "./providers/ToasterProvider"
 
 export const metadata = {
   title: "Tours",
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={nunitoFont.className}>
         <OnlyClient>
+          <ToasterProvider />
           <RegisterModal />
           <NavBar />
         </OnlyClient>
