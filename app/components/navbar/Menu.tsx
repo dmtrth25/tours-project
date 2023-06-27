@@ -35,7 +35,7 @@ const Menu: FC<MenuProps> = ({ currentUser }) => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <ImgLogo />
+            <ImgLogo src={currentUser?.image} />
           </div>
         </div>
       </div>
