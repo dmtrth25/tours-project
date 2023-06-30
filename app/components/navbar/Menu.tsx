@@ -1,14 +1,16 @@
 "use client"
 
 import { FC, useCallback, useState } from "react"
+import { signOut } from "next-auth/react"
 import { AiOutlineMenu } from "react-icons/ai"
+import { SafeUser } from "@/app/types"
+
 import ImgLogo from "../ImgLogo"
 import MenuItem from "./MenuItem"
 
 import useRegisterModal from "../../hooks/useRegisterModal"
 import useLoginModal from "@/app/hooks/useLoginModal"
-import { signOut } from "next-auth/react"
-import { SafeUser } from "@/app/types"
+import useRentModal from "@/app/hooks/useRentModal"
 
 interface MenuProps {
   currentUser?: SafeUser | null
@@ -17,16 +19,28 @@ interface MenuProps {
 const Menu: FC<MenuProps> = ({ currentUser }) => {
   const registerModal = useRegisterModal()
   const loginModal = useLoginModal()
+  const rentModal = useRentModal()
   const [isShow, setIsShow] = useState(false)
 
   const toggleShow = useCallback(() => {
     setIsShow((prevState) => !prevState)
   }, [])
 
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen()
+    }
+
+    rentModal.onOpen()
+  }, [currentUser, loginModal, rentModal])
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
-        <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
+        <div
+          onClick={onRent}
+          className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
+        >
           Your Home
         </div>
         <div
@@ -47,7 +61,7 @@ const Menu: FC<MenuProps> = ({ currentUser }) => {
                 <MenuItem onClick={() => {}} label="My trips" />
                 <MenuItem onClick={() => {}} label="My favorites" />
                 <MenuItem onClick={() => {}} label="My reservations" />
-                <MenuItem onClick={() => {}} label="My home" />
+                <MenuItem onClick={rentModal.onOpen} label="My home" />
                 <hr />
                 <MenuItem onClick={() => signOut()} label="Logout" />
               </>

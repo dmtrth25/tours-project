@@ -1,11 +1,15 @@
+import { Nunito } from "next/font/google"
+
 import OnlyClient from "./components/OnlyClient"
 import RegisterModal from "./components/modals/RegisterModal"
 import NavBar from "./components/navbar/NavBar"
-import "./globals.css"
-import { Nunito } from "next/font/google"
+
 import ToasterProvider from "./providers/ToasterProvider"
-import LoginModal from "./components/modals/LoginModal"
 import getCurrentUser from "./actions/getCurrentUser"
+
+import LoginModal from "./components/modals/LoginModal"
+import RentModal from "./components/modals/RentModal"
+import "./globals.css"
 
 export const metadata = {
   title: "Tours",
@@ -27,6 +31,7 @@ export default async function RootLayout({
       <body className={nunitoFont.className}>
         <OnlyClient>
           <ToasterProvider />
+          <RentModal />
           <LoginModal />
           <RegisterModal />
           <NavBar currentUser={currentUser} />
