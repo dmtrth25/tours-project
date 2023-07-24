@@ -1,11 +1,13 @@
+import getListings from "./actions/getListings"
+
 import Container from "./components/Container"
 import Empty from "./components/Empty"
 import OnlyClient from "./components/OnlyClient"
 
-const Home = () => {
-  const isEmpty = true
+const Home = async () => {
+  const listings = await getListings()
 
-  if (isEmpty) {
+  if (listings.length === 0) {
     return (
       <OnlyClient>
         <Empty showReset />
@@ -29,7 +31,9 @@ const Home = () => {
             gap-8
           "
           >
-            <div>Feature list</div>
+            {listings.map((item: any) => {
+              return <div>{item.title}</div>
+            })}
           </div>
         </Container>
       </OnlyClient>
