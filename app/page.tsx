@@ -34,7 +34,7 @@ const Home = async () => {
             gap-8
           "
           >
-            {listings.map((item: any) => {
+            {listings.map((item) => {
               return (
                 <ListingCard
                   key={item.id}
